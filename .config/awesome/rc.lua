@@ -750,4 +750,4 @@ tag.connect_signal("property::selected", backham)
 ---- | START | ---------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------
 awful.spawn.with_shell("xrandr --output eDP --primary --mode 1366x768 --rate 60.00 --output HDMI-A-0 --mode 2560x1080 --rate 75.00 --left-of eDP")
-awful.spawn.with_shell("nitrogen --restore")
+a
