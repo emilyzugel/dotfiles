@@ -62,17 +62,17 @@ run_once({ "urxvtd", "unclutter -root" }) -- comma-separated entries
 
 --||  Variable definitions ||--
 local themes = {
-    "blackburn",       -- 1
-    "copland",         -- 2
-    "dremora",         -- 3
-    "holo",            -- 4
-    "multicolor",      -- 5
-    "powerarrow",      -- 6
-    "powerarrow-dark", -- 7
-    "rainbow",         -- 8
-    "steamburn",       -- 9
-    "vertex",           -- 10
-    "mocha"
+    "blackburn",         -- 1
+    "copland",           -- 2
+    "dremora",           -- 3
+    "holo",              -- 4
+    "multicolor",        -- 5
+    "powerarrow",        -- 6
+    "powerarrow-dark",   -- 7
+    "rainbow",           -- 8
+    "steamburn",         -- 9
+    "vertex",            --10
+    "mocha"              --11
 }
 
 local chosen_theme = themes[11]
@@ -221,17 +221,17 @@ globalkeys = mytable.join(
               {description = "take a screenshot", group = "hotkeys"}),
 
     -- X screen locker
-    awful.key({ altkey, "Control" }, "l", function () os.execute(scrlocker) end,
-              {description = "lock screen", group = "hotkeys"}),
+    --awful.key({ altkey, "Control" }, "l", function () os.execute(scrlocker) end,
+    --          {description = "lock screen", group = "hotkeys"}),
 
     -- Show help
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
 
     -- Tag swich/browsing
-    awful.key({ "Control" }, "j",   awful.tag.viewprev,
+    awful.key({ "Control" }, "[",   awful.tag.viewprev,
               {description = "view previous", group = "tag"}),
-    awful.key({ "Control" }, "k",  awful.tag.viewnext,
+    awful.key({ "Control" }, "]",  awful.tag.viewnext,
               {description = "view next", group = "tag"}),
 
     -- By-direction client focus
@@ -260,7 +260,6 @@ globalkeys = mytable.join(
         end,
         {description = "focus right", group = "client"}),
 	]]--
-
     -- Menu Keybing
     awful.key({ modkey,           }, "w", function () awful.util.mymainmenu:show() end,
               {description = "show main menu", group = "awesome"}),
@@ -270,7 +269,7 @@ globalkeys = mytable.join(
               {description = "swap with next client by index", group = "client"}),
     awful.key({ modkey }, "k", function () awful.client.swap.byidx( -1)    end,
               {description = "swap with previous client by index", group = "client"}),
-    awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end,
+    awful.key({ modkey, "Shift" }, "Up", function () awful.screen.focus_relative( 1) end,
               {description = "focus the next monitor", group = "screen"}),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
               {description = "jump to urgent client", group = "client"}),
@@ -356,37 +355,15 @@ globalkeys = mytable.join(
     awful.key({ modkey, "Shift"}, "p", function () os.execute("brillo -q -U 10") end,
               {description = "-10%", group = "hotkeys"}),
 
-    -- ALSA volume control
-    awful.key({ altkey }, "Up",
-        function ()
-            os.execute(string.format("amixer -q set %s 1%%+", beautiful.volume.channel))
-            beautiful.volume.update()
-        end,
-        {description = "volume up", group = "hotkeys"}),
-    awful.key({ altkey }, "Down",
-        function ()
-            os.execute(string.format("amixer -q set %s 1%%-", beautiful.volume.channel))
-            beautiful.volume.update()
-        end,
-        {description = "volume down", group = "hotkeys"}),
-    awful.key({ altkey }, "m",
-        function ()
-            os.execute(string.format("amixer -q set %s toggle", beautiful.volume.togglechannel or beautiful.volume.channel))
-            beautiful.volume.update()
-        end,
-        {description = "toggle mute", group = "hotkeys"}),
-    awful.key({ altkey, "Control" }, "m",
-        function ()
-            os.execute(string.format("amixer -q set %s 100%%", beautiful.volume.channel))
-            beautiful.volume.update()
-        end,
-        {description = "volume 100%", group = "hotkeys"}),
-    awful.key({ altkey, "Control" }, "0",
-        function ()
-            os.execute(string.format("amixer -q set %s 0%%", beautiful.volume.channel))
-            beautiful.volume.update()
-        end,
-        {description = "volume 0%", group = "hotkeys"}),
+  -- Volume control keybindings
+  
+  awful.key({ modkey }, ",", function () awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%") end,
+              {description = "increase volume", group = "volume"}),
+  awful.key({ modkey }, ".", function () awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%") end,
+              {description = "decrease volume", group = "volume"}),
+  awful.key({ "Control" }, "m", function () awful.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle") end,
+              {description = "mute volume", group = "volume"}),
+
 
     -- MPD control
     awful.key({ altkey, "Control" }, "Up",
