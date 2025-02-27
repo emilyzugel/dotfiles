@@ -1,0 +1,31 @@
+1. Install Kali Linux with the graphical installer (only base system -> unmark extra enviroments)
+2. After login in, update the system
+  :$ sudo apt update && sudo apt full-upgrade -y
+3. Install dependencies
+  :$ sudo apt install awesome lightdm lightdm-gtk-greeter xorg x11-utils x11-xserver-utils xinit -y
+4. Enable and config lightdm:
+  :$ sudo systemctl enable lightdm
+  :$ sudo systemctl start lightdm
+ 5. Reboot
+
+**Now it's time to configure awesome rc.lua and add themes
+0. Install inicial dependencies
+  :$ sudo apt install git firefox-esr neovim 
+1. Make the ~/.config/awesome dir to add the custom modified rc.lua
+   :$ mkdir -p ~/.config/awesome
+   :$ cp /etc/xdg/awesome/rc.lua ~/.config/awesome/
+   (the save copy/original config is placed at /etc/xdg/awesome/, the system, will run this config when you broke something in the custom config ~/.config/awesome/ .
+
+2. Edit only exclusive simple things on the original rc.lua, like the terminal, browsers and xrandr
+  :$ sudo nvim /etc/xdg/awesome/rc.lua
+3. Add the themes from lcpz copycats
+  > Installation resume from github.com/lcpz/awesome-copycats
+    :$ sudo git clone --recurse-submodules --remote-submodules --depth 1 -j 2 https://github.com/lcpz/awesome-copycats.git
+    :$ sudo mkdir -p ~/.config/awesome (pode ja existir pq criamos acima)
+    :$ sudo mv -bv awesome-copycats/{*,.[^.]*} ~/.config/awesome
+    :$ sudo rmm -rf awesome-copycats
+    > To remove git files :$ mv -bv awesome-copycats/* ~/.config/awesome; rm -rf awesome-copycats
+    > Dependecies :$ sudo apt install xsel slock scrot
+    DONE > restart awesome
+
+    Now the themes are installed just reconfigure the system shortcuts and apparence :) 
