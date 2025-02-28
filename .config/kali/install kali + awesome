@@ -31,12 +31,14 @@
     Now the themes are installed just reconfigure the system shortcuts and apparence :) 
 
 KEYBOARD LAYOUTS:
-:$ setxkbmap -layout us,br,kr -option grp:ctrl_shift_toggle
+:$ setxkbmap -layout us,br,kr -option grp:ctrl_shift_toggle (nao seta esse, ta aqui so se tiver erro)
 :$ sudo apt install fcitx5 fcitx5-hangul fcitx-configtool
 :$ fcitx5-configtool (desmarca a opcao only show current language e escolhe eng prtugues br e hangul)
-> Criar atalho scwitcher no rc.lua
-awful.key({ "Mod1" }, "Space", function () awful.spawn("fcitx5-remote -t") end,
-          {description = "Alternar layout do teclado", group = "Teclado"})
+  > Atalhos: Global options > 
+      Temporally switch between... -> Left Shift
+      Enumarate ...forwoard -> Alt + Left Shift
+      Enumarate ...backward -> Alt + Left Shift
+
 > Adicionar o fcitx5 ao start do sistema: 
 :$ nvim ~/.xprofile
   Digite:
@@ -45,6 +47,9 @@ awful.key({ "Mod1" }, "Space", function () awful.spawn("fcitx5-remote -t") end,
   export XMODIFIERS=@im=fcitx
   fcitx5 &
 
+| > Caso o shortcut bug: Criar atalho scwitcher no rc.lua
+|   awful.key({ "Mod1" }, "Space", function () awful.spawn("fcitx5-remote -t") end,
+|          {description = "Alternar layout do teclado", group = "Teclado"})
 
 
 DEPENDENCIES:
