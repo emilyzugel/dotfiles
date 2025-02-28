@@ -449,6 +449,11 @@ globalkeys = mytable.join(
     awful.key({ modkey },   "x",      function () awful.spawn("rofi -show drun -display-drun ' Exec ' ") end,
         {description = "rofi-apps", group = "Personal launchers"})
 
+   -- TAKE SCREENSHOT (SCROT) (COMMA ABOVE!!)
+   --[[ awful.key({ altkey },   ";",      function () awful.spawn("scrot -s") end,
+        {description = "scrot screenshot", group = "Personal launchers"})]]--
+
+	
      --[[awful.key({ modkey }, "y",
               function ()
                   awful.prompt.run {
