@@ -453,6 +453,10 @@ globalkeys = mytable.join(
    --[[ awful.key({ altkey },   ";",      function () awful.spawn("scrot -s") end,
         {description = "scrot screenshot", group = "Personal launchers"})]]--
 
+  -- Language Switcher (fcitx5)
+  --[[ awful.key({ "Shift" }, "/", function () awful.spawn("fcitx5-remote -t") end,
+          {description = "Key-Layout Switcher", group = "language"}) ]]--
+
 	
      --[[awful.key({ modkey }, "y",
               function ()
