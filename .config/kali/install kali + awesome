@@ -29,3 +29,18 @@
     DONE > restart awesome
 
     Now the themes are installed just reconfigure the system shortcuts and apparence :) 
+
+KEYBOARD LAYOUTS:
+:$ setxkbmap -layout us,br,kr -option grp:ctrl_shift_toggle
+:$ sudo apt install fcitx5 fcitx5-hangul fcitx-configtool
+:$ fcitx5-configtool (desmarca a opcao only show current language e escolhe eng prtugues br e hangul)
+
+
+DEPENDENCIES:
+pulseaudio
+ranger
+lf (minimal explorer)
+htop
+obsidian
+virtual box
+rofi
