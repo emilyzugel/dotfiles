@@ -34,6 +34,17 @@ KEYBOARD LAYOUTS:
 :$ setxkbmap -layout us,br,kr -option grp:ctrl_shift_toggle
 :$ sudo apt install fcitx5 fcitx5-hangul fcitx-configtool
 :$ fcitx5-configtool (desmarca a opcao only show current language e escolhe eng prtugues br e hangul)
+> Criar atalho scwitcher no rc.lua
+awful.key({ "Mod1" }, "Space", function () awful.spawn("fcitx5-remote -t") end,
+          {description = "Alternar layout do teclado", group = "Teclado"})
+> Adicionar o fcitx5 ao start do sistema: 
+:$ nvim ~/.xprofile
+  Digite:
+  export GTK_IM_MODULE=fcitx
+  export QT_IM_MODULE=fcitx
+  export XMODIFIERS=@im=fcitx
+  fcitx5 &
+
 
 
 DEPENDENCIES:
