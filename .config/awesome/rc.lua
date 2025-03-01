@@ -101,6 +101,7 @@ awful.layout.layouts = {
     awful.layout.suit.floating,
 }
 
+-- Config num of master wiindows for 'termfair' and 'cascade' layouts (LAIN)  
 lain.layout.termfair.nmaster           = 3
 lain.layout.termfair.ncol              = 1
 lain.layout.termfair.center.nmaster    = 3
@@ -111,44 +112,60 @@ lain.layout.cascade.tile.extra_padding = 5
 lain.layout.cascade.tile.nmaster       = 5
 lain.layout.cascade.tile.ncol          = 2
 
+-------------------------------
+-- |TAGLIS MOUSE CONFIG |------
+-------------------------------
+--Tag Left-click: to view tag;
 awful.util.taglist_buttons = mytable.join(
     awful.button({ }, 1, function(t) t:view_only() end),
+    -- Tag Left-click +  Modkey: to move window;
     awful.button({ modkey }, 1, function(t)
         if client.focus then client.focus:move_to_tag(t) end
     end),
-    awful.button({ }, 3, awful.tag.viewtoggle),
-    awful.button({ modkey }, 3, function(t)
+
+    -- Tag Right-click: to spy view the tag;
+    awful.button({ }, 3, awful.tag.viewtoggle)--,
+    --Tag Right-click + modkey: to move the window;
+    --[[ awful.button({ modkey }, 3, function(t)
         if client.focus then client.focus:toggle_tag(t) end
-    end),
-    awful.button({ }, 4, function(t) awful.tag.viewnext(t.screen) end),
-    awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
+    end) ]]--,
+	
+    -- Switch tag when mmouse scholling:
+    --awful.button({ }, 4, function(t) awful.tag.viewnext(t.screen) end),
+    --awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
 )
 
-awful.util.tasklist_buttons = mytable.join(
+--Tag (Left Click): minimizes the window if it's already focused, if not, else: brings it to the front
+--[[ awful.util.tasklist_buttons = mytable.join(
      awful.button({ }, 1, function(c)
          if c == client.focus then
              c.minimized = true
          else
              c:emit_signal("request::activate", "tasklist", { raise = true })
          end
-     end),
-     awful.button({ }, 3, function()
+     end),--]]
+     --Tag Right Click: Displays a menu eith the active windows
+     --[[ awful.button({ }, 3, function()
          awful.menu.client_list({ theme = { width = 250 } })
-     end),
-     awful.button({ }, 4, function() awful.client.focus.byidx(1) end),
-     awful.button({ }, 5, function() awful.client.focus.byidx(-1) end)
-)
+     end)--, ]]--
+     -- Tag Focuses on the next/previous window when scrolling
+     --awful.button({ }, 4, function() awful.client.focus.byidx(1) end),
+     --awful.button({ }, 5, function() awful.client.focus.byidx(-1) end)
+--)
+-----------------------------------------------------------------------------------------------
 
+-- User theme dir
 beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme))
 
 ------------------------------------------------------------------------------------------------
 ---- | MENU | ----------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------
--- Create a launcher widget and a main menu
+-- Main Awesome Menu Options
 local myawesomemenu = {
    { "Hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
    { "Manual", string.format("%s -e man awesome", terminal) },
    { "Edit config", string.format("%s -e %s %s", terminal, editor, awesome.conffile) },
+   { "Edit rc.lua", string.format("%s -e %s %s", terminal, "nvim", "/etc/xdg/awesome/rc.lua")},
    { "Restart", awesome.restart },
    { "Quit", function() awesome.quit() end },
 }
