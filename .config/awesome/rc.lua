@@ -486,14 +486,14 @@ globalkeys = mytable.join(
         {description = "toggle fullscreen", group = "client"}),]]--
     awful.key({ modkey }, "q",      function (c) c:kill()                         end,
               {description = "close", group = "client"}),
-    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
-              {description = "toggle floating", group = "client"}),
-    awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
-              {description = "move to master", group = "client"}),
-    awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
-              {description = "move to screen", group = "client"}),
-    awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
-              {description = "toggle keep on top", group = "client"}),
+   --[[ awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
+              {description = "toggle floating", group = "client"}), ]]--
+   --[[  awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
+              {description = "move to master", group = "client"}), ]]-- 
+    awful.key({ modkey, "Control" }, "Up",      function (c) c:move_to_screen()               end,
+              {description = "move window to other screen-monitor", group = "client"}),
+    --[[ awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
+              {description = "toggle keep on top", group = "client"}), ]]--
     awful.key({ modkey,           }, "n",
         function (c)
             -- The client currently has the input focus, so it cannot be
@@ -571,22 +571,31 @@ for i = 1, 9 do
     )
 end
 
+--------------------------------
+--| MOUSE SIGNALS  | -----------
+--------------------------------
+
 clientbuttons = mytable.join(
+    -- Left Mouse Click: activates the window
     awful.button({ }, 1, function (c)
         c:emit_signal("request::activate", "mouse_click", {raise = true})
     end),
+    -- Left Mouse Click + Modkey : allows to resize and move window
     awful.button({ modkey }, 1, function (c)
         c:emit_signal("request::activate", "mouse_click", {raise = true})
         awful.mouse.client.move(c)
     end),
+    -- Right Mouse Click: activates the window
     awful.button({ modkey }, 3, function (c)
         c:emit_signal("request::activate", "mouse_click", {raise = true})
         awful.mouse.client.resize(c)
     end)
 )
 
--- Set keys
-root.keys(globalkeys)
+--------------------------
+-- Set keys | ------------
+--------------------------
+root.keys(globalkeys)  -- binds the global keybindings definied in `globalkeys` to the root window
 ------------------------------------------------------------------------------------------------
 ---- | RULES | ---------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------
