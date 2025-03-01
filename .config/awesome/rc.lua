@@ -160,7 +160,7 @@ beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv
 ------------------------------------------------------------------------------------------------
 ---- | MENU | ----------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------
--- Main Awesome Menu Options
+-- || Awesome Menu
 local myawesomemenu = {
    { "Hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
    { "Manual", string.format("%s -e man awesome", terminal) },
@@ -170,6 +170,7 @@ local myawesomemenu = {
    { "Quit", function() awesome.quit() end },
 }
 
+-- || Freedesktop Menu
 awful.util.mymainmenu = freedesktop.menu.build {
     before = {
         { "Awesome", myawesomemenu, beautiful.awesome_icon },
@@ -224,14 +225,14 @@ awful.screen.connect_for_each_screen(function(s) beautiful.at_screen_connect(s) 
 ------------------------------------------------------------------------------------------------
 root.buttons(mytable.join(
     awful.button({ }, 3, function () awful.util.mymainmenu:toggle() end)
-))
+)) --movi pra cima junto com a config da taglist
 
 ------------------------------------------------------------------------------------------------
 ---- | KEYBINDINGS | ---------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------
 globalkeys = mytable.join(
     -- Destroy all notifications
-    awful.key({ "Control",           }, "space", function() naughty.destroy_all_notifications() end,
+    awful.key({ "Control",           }, "Delete", function() naughty.destroy_all_notifications() end,
               {description = "destroy all notifications", group = "hotkeys"}),
     -- Take a screenshot
     -- https://github.com/lcpz/dots/blob/master/bin/screenshot
@@ -243,14 +244,14 @@ globalkeys = mytable.join(
     --          {description = "lock screen", group = "hotkeys"}),
 
     -- Show help
-    awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
+    awful.key({ modkey,           }, "/",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
 
-    -- Tag swich/browsing
-    awful.key({ "Control" }, "[",   awful.tag.viewprev,
-              {description = "view previous", group = "tag"}),
-    awful.key({ "Control" }, "]",  awful.tag.viewnext,
+    -- Tag browsing
+    awful.key({ modkey }, "Escape",   awful.tag.viewnext,
               {description = "view next", group = "tag"}),
+    awful.key({ modkey }, "[",  awful.tag.viewprev,
+              {description = "view previous", group = "tag"}),
 
     -- By-direction client focus
     --[[awful.key({ modkey }, "j",
@@ -277,21 +278,21 @@ globalkeys = mytable.join(
             if client.focus then client.focus:raise() end
         end,
         {description = "focus right", group = "client"}),
-	]]--
-    -- Menu Keybing
+	]]-- -- (deleted) 
+    -- Open Awesome Menu
     awful.key({ modkey,           }, "w", function () awful.util.mymainmenu:show() end,
               {description = "show main menu", group = "awesome"}),
 
-    -- Layout manipulation
-    awful.key({ modkey }, "j", function () awful.client.swap.byidx(  1)    end,
-              {description = "swap with next client by index", group = "client"}),
-    awful.key({ modkey }, "k", function () awful.client.swap.byidx( -1)    end,
-              {description = "swap with previous client by index", group = "client"}),
-    awful.key({ modkey, "Shift" }, "Up", function () awful.screen.focus_relative( 1) end,
-              {description = "focus the next monitor", group = "screen"}),
-    awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
-              {description = "jump to urgent client", group = "client"}),
-    awful.key({ altkey  }, "Tab",
+    ---------------------------------------------------------------------------
+    -- || Window manipulation || ----------------------------------------------
+    ---------------------------------------------------------------------------
+    awful.key({ modkey, "Shift" }, "Tab", function () awful.client.swap.byidx(  1)    end,
+              {description = "Change window position", group = "client"}),
+    
+    awful.key({ modkey, "Control" }, "Right", function () awful.screen.focus_relative( 1) end,
+              {description = "switch screen-monitor focus", group = "screen"}),
+	
+    --[[ awful.key({ altkey  }, "j",
         function ()
             if cycle_prev then
                 awful.client.focus.history.previous()
@@ -302,7 +303,7 @@ globalkeys = mytable.join(
                 client.focus:raise()
             end
         end,
-        {description = "change focus", group = "client"}),
+        {description = "change focus", group = "client"}), ]]-- --deletado (vai e volta entre 2 window
 
 
     -- On-the-fly useless gaps change
@@ -324,7 +325,7 @@ globalkeys = mytable.join(
               {description = "delete tag", group = "tag"}),
 	]]--
 
-    -- Standard program
+    -- Standard program (added above with other similar)
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
@@ -332,7 +333,7 @@ globalkeys = mytable.join(
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
 
-    awful.key({ modkey, altkey    }, "l",     function () awful.tag.incmwfact( 0.05)          end,
+    --[[ awful.key({ modkey, altkey    }, "l",     function () awful.tag.incmwfact( 0.05)          end,
               {description = "increase master width factor", group = "layout"}),
     awful.key({ modkey, altkey    }, "h",     function () awful.tag.incmwfact(-0.05)          end,
               {description = "decrease master width factor", group = "layout"}),
@@ -343,7 +344,7 @@ globalkeys = mytable.join(
     awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1, nil, true)    end,
               {description = "increase the number of columns", group = "layout"}),
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
-              {description = "decrease the number of columns", group = "layout"}),
+              {description = "decrease the number of columns", group = "layout"}), ]]--
     awful.key({ modkey,           }, "space", function () awful.layout.inc( 1)                end,
               {description = "next layout", group = "layout"}),
 
@@ -356,16 +357,16 @@ globalkeys = mytable.join(
     end, {description = "restore minimized", group = "client"}), ]]--
 
     -- Dropdown application
-    awful.key({ modkey, }, "z", function () awful.screen.focused().quake:toggle() end,
-              {description = "dropdown application", group = "launcher"}),
+    --[[ awful.key({ modkey, }, "z", function () awful.screen.focused().quake:toggle() end,
+              {description = "dropdown application", group = "launcher"}), ]]--
 
     -- Widgets popups
     awful.key({ altkey, }, "c", function () if beautiful.cal then beautiful.cal.show(7) end end,
               {description = "show calendar", group = "widgets"}),
-    awful.key({ altkey, }, "h", function () if beautiful.fs then beautiful.fs.show(7) end end,
-              {description = "show filesystem", group = "widgets"}),
-    awful.key({ altkey, }, "w", function () if beautiful.weather then beautiful.weather.show(7) end end,
-              {description = "show weather", group = "widgets"}),
+    --[[ awful.key({ altkey, }, "h", function () if beautiful.fs then beautiful.fs.show(7) end end,
+              {description = "show filesystem", group = "widgets"}), ]]--
+    --[[ awful.key({ altkey, }, "w", function () if beautiful.weather then beautiful.weather.show(7) end end,
+              {description = "show weather", group = "widgets"}), ]]--
 
     -- Screen brightness
     awful.key({ modkey }, "p", function () os.execute("brillo -q -A 10") end,
@@ -383,7 +384,7 @@ globalkeys = mytable.join(
               {description = "mute volume", group = "volume"}),
 
 
-    -- MPD control
+    -- MPD control (try set up)
     awful.key({ altkey, "Control" }, "Up",
         function ()
             os.execute("mpc toggle")
@@ -435,24 +436,10 @@ globalkeys = mytable.join(
     awful.key({ modkey }, "e" , function () awful.spawn(fm) end,
               {description = "open a file manager", group = "launcher"}),
     awful.key({ modkey }, "v", function () awful.spawn(code) end,
-              {description = "open vscodium", group = "laucher"}),
+              {description = "open vscodium", group = "launcher"}),
     awful.key({ modkey }, "9", function () awful.spawn(bravebrower) end,
-              {description = "open brave", group = "laucher"}),
+              {description = "open brave", group = "launcher"}),
 
-    -- Default
-    --[[ Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"}),
-    --]]
-    --[[ dmenu
-    awful.key({ modkey }, "x", function ()
-            os.execute(string.format("dmenu_run -i -fn 'Monospace' -nb '%s' -nf '%s' -sb '%s' -sf '%s'",
-            beautiful.bg_normal, beautiful.fg_normal, beautiful.bg_focus, beautiful.fg_focus))
-        end,
-        {description = "show dmenu", group = "launcher"}),
-    --]]
-    -- alternatively use rofi, a dmenu-like application with more features
-    -- check https://github.com/DaveDavenport/rofi for more details
     --[[ rofi
     awful.key({ modkey }, "x", function ()
             os.execute(string.format("rofi -show %s -theme %s",
@@ -462,9 +449,9 @@ globalkeys = mytable.join(
     --]]
     -- Prompt
     awful.key({ modkey }, "r", function () awful.screen.focused().mypromptbox:run() end,
-              {description = "run prompt", group = "launcher"}),
+              {description = "launch run", group = "launcher"}),
     awful.key({ modkey },   "x",      function () awful.spawn("rofi -show drun -display-drun ' Exec ' ") end,
-        {description = "rofi-apps", group = "Personal launchers"})
+        {description = "rofi-apps", group = "laucher"})
 
    -- TAKE SCREENSHOT (SCROT) (COMMA ABOVE!!)
    --[[ awful.key({ altkey },   ";",      function () awful.spawn("scrot -s") end,
