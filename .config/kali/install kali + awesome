@@ -52,15 +52,7 @@ KEYBOARD LAYOUTS:
 |          {description = "Alternar layout do teclado", group = "Teclado"})
 
 
-TO DISABLE LIGHTDM:
-:$ sudo systemctl disable lightdm.service
-:$ sudo nvim /etc/default/grub
-  add --> GRUB_CMDLINE_LINUX_DEFAULT="text"
-:$ sudo update-grub
-:$ reboot
-:$ nvim ~/.xinitrc
-  add --> exec awesome
-:$ startx
+
 
 
 DEPENDENCIES:
