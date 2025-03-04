@@ -54,7 +54,42 @@ KEYBOARD LAYOUTS:
 |          {description = "Alternar layout do teclado", group = "Teclado"})
 
 
+LAZYVIM INSTALL > NVIM
+Install dependencies:
+  Nerd fonts: JetBrains Mono (ask gpt how to unzip and where to put it)
+  Treesitter > :$ sudo apt install tree-sitter-cli
+:$ mv ~/.config/nvim{,.bak}
+:$ sudo git clone https://github.com/LazyVim/starter ~/.config/nvim
+:$ rm -rf ~/.config/nvim/.git
+:$ nvim
 
+>INSTALL CATPPUCCIN ON LAZYVIM
+1. Open ~/.config/nvim/lua/plugins/colorscheme.lua e insira:
+  "return {
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
+    config = function()
+      require("catppuccin").setup({
+        flavour = "mocha", -- Opções: latte, frappe, macchiato, mocha
+        integrations = {
+          treesitter = true,
+          cmp = true,
+          gitsigns = true,
+          telescope = true,
+          nvimtree = true,
+          which_key = true,
+        },
+      })
+      vim.cmd.colorscheme("catppuccin")
+    end,
+  },
+}
+"
+2. :$ :Lazy sync
+3. :$ :colorscheme catppuccin
+> Shortcut to changetheme: space + u + C
 
 
 DEPENDENCIES:
