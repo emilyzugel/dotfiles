@@ -48,11 +48,10 @@ KEYBOARD LAYOUTS:
   export QT_IM_MODULE=fcitx
   export XMODIFIERS=@im=fcitx
   fcitx5 &
-
 | > Caso o shortcut bug: Criar atalho scwitcher no rc.lua
 |   awful.key({ "Mod1" }, "Space", function () awful.spawn("fcitx5-remote -t") end,
 |          {description = "Alternar layout do teclado", group = "Teclado"})
-
+> DONE :)
 
 LAZYVIM INSTALL > NVIM
 Install dependencies:
@@ -62,6 +61,7 @@ Install dependencies:
 :$ sudo git clone https://github.com/LazyVim/starter ~/.config/nvim
 :$ rm -rf ~/.config/nvim/.git
 :$ nvim
+> DONE :) 
 
 >INSTALL CATPPUCCIN ON LAZYVIM
 1. Open ~/.config/nvim/lua/plugins/colorscheme.lua e insira:
@@ -90,6 +90,19 @@ Install dependencies:
 2. :$ :Lazy sync
 3. :$ :colorscheme catppuccin
 > Shortcut to changetheme: space + u + C
+> DONE :)
+
+
+INSTALL AND CONFIG KITTY:
+:$ sudo apt install kitty
+:$ sudo git clone https://github.com/catppuccin/kitty.git ~/.config/kitty/catppuccin
+:$ sudo nvim ~/.config/kitty.kitty.conf -- escreva:
+    " KITTY_ENABLE_REMOTE_CONTROL=1 kitty
+      allow_remote_control yes
+      include ~/.config/kitty/catppuccin/themes/mocha.conf (confere se é isso memso)
+    "
+> DONE :)
+     
 
 
 DEPENDENCIES:
