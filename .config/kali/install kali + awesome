@@ -23,8 +23,10 @@
     :$ sudo git clone --recurse-submodules --remote-submodules --depth 1 -j 2 https://github.com/lcpz/awesome-copycats.git
     :$ sudo mkdir -p ~/.config/awesome (pode ja existir pq criamos acima)
     :$ sudo mv -bv awesome-copycats/{*,.[^.]*} ~/.config/awesome
-    :$ sudo rmm -rf awesome-copycats
+    :$ sudo rm -rf awesome-copycats
     > To remove git files :$ mv -bv awesome-copycats/* ~/.config/awesome; rm -rf awesome-copycats
+    :$ cd ~/.config/awesome
+    :$ cp rc.lua.template rc.lua
     > Dependecies :$ sudo apt install xsel slock scrot
     DONE > restart awesome
 
