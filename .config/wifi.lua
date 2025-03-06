@@ -48,4 +48,6 @@ local command = string.format('nmcli device wifi connect "%s" password "%s"', ss
 -- Executa o comando no terminal
 os.execute(command)
 
+-- [[ To run in a single command, create an alias on or ~/.zshrc: alias wifi="lua ~/thefolder/yourcodeis/wifi.lua"
+
 
