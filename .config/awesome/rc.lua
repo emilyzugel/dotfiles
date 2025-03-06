@@ -238,11 +238,6 @@ globalkeys = mytable.join(
     -- https://github.com/lcpz/dots/blob/master/bin/screenshot
     awful.key({ altkey }, "p", function() os.execute("screenshot") end,
               {description = "take a screenshot", group = "hotkeys"}),
-
-    -- X screen locker
-    --awful.key({ altkey, "Control" }, "l", function () os.execute(scrlocker) end,
-    --          {description = "lock screen", group = "hotkeys"}),
-
     -- Show help
     awful.key({ modkey,           }, "/",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
