@@ -252,6 +252,19 @@ globalkeys = mytable.join(
               {description = "view next", group = "tag"}),
     awful.key({ modkey }, "[",  awful.tag.viewprev,
               {description = "view previous", group = "tag"}),
+    --Janela foco / -- Window focus
+    awful.key({ altkey,           }, "Tab",
+        function ()
+            awful.client.focus.byidx( 1)
+        end,
+        {description = "focus next window", group = "client"}
+    ),
+    awful.key({ altkey,    "Shift"       }, "Tab",
+        function ()
+            awful.client.focus.byidx(-1)
+        end,
+        {description = "focus previous window", group = "client"}
+    ),
 
     -- By-direction client focus
     --[[awful.key({ modkey }, "j",
