@@ -1,8 +1,8 @@
-1. Install Kali Linux with the graphical installer (only base system -> unmark extra enviroments)
+k1. Install Kali Linux with the graphical installer (only base system -> unmark extra enviroments)
 2. After login in, update the system
   :$ sudo apt update && sudo apt full-upgrade -y
 3. Install dependencies
-  :$ sudo apt install awesome lightdm lightdm-gtk-greeter xorg x11-utils x11-xserver-utils xinit -y
+  :$ sudo apt install awesome lightdm lightdm-gtk-greeter xorg x11-utils x11-xserver-utils xinit network-manager pulseaudio -y
 4. Enable and config lightdm:
   :$ sudo systemctl enable lightdm
   :$ sudo systemctl start lightdm
