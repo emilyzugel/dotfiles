@@ -95,10 +95,14 @@ local bravebrower = "brave"
 awful.util.terminal = terminal
 awful.util.tagnames = { " ᗧ ", " ••• ", " ᗣ ", " ᗣ ", " ᗣ ", " ᗣ " }
 awful.layout.layouts = {
-    awful.layout.suit.spiral,
-    awful.layout.suit.tile,
-    awful.layout.suit.tile.left,
-    awful.layout.suit.floating,
+    awful.layout.suit.fair,
+    lain.layout.centerwork,
+    lain.layout.termfair.center,
+    awful.layout.suit.tile.top,
+    --awful.layout.suit.spiral,
+    --awful.layout.suit.tile,
+    --lain.layout.termfair,
+    --awful.layout.suit.floating,
 }
 
 -- Config num of master wiindows for 'termfair' and 'cascade' layouts (LAIN)  
