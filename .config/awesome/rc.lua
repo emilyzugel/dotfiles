@@ -2,6 +2,9 @@
 ---------------------------------------------------------------------------------
 -- L C P Z   A W E S O M E   R C . L U A  ---------------------------------------
 ---------------------------------------------------------------------------------
+os.execute("export QT_STYLE_OVERRIDE=kvantum")
+os.execute("export QT6_STYLE_OVERRIDE=kvantum")
+
 
 ---------------------------------------------------------------------------------
 -- L I B R A R I E S ------------------------------------------------------------
@@ -99,7 +102,7 @@ local themes = {
     "powerarrow-dark", -- 7
     "rainbow",         -- 8
     "steamburn",       -- 9
-    "vertex",           -- 10
+    "vertex",          -- 10
     "mocha"            -- 11
 }
 
@@ -110,7 +113,7 @@ local terminal     = "kitty"
 local vi_focus     = false -- vi-like client focus https://github.com/lcpz/awesome-copycats/issues/275
 local cycle_prev   = true  -- cycle with only the previously focused client or all https://github.com/lcpz/awesome-copycats/issues/274
 local editor       = os.getenv("EDITOR") or "nvim"
-local browser      = "librewolf"
+local browser      = "firefox"
 
 awful.util.terminal = terminal
 awful.util.tagnames = { "1", "2", "3", "4", "5" }
@@ -172,7 +175,7 @@ local myawesomemenu = {
    { "Manual", string.format("%s -e man awesome", terminal) },
    { "edit config", string.format("%s -e %s %s", terminal, "nvim", awesome.conffile)},
    { "edit theme", string.format("%s -e %s %s", terminal, "nvim", awesome.conffile)},
-   { "edit rc.lua", string.format("%s -e %s %s", terminal, "nvim", open_themesfolder)},
+   { "edit rc.lua", string.format("%s -e %s %s", terminal, "nvim", open_themefolder)},
    { "Restart", awesome.restart },
    { "Quit", function() awesome.quit() end },
 }
@@ -273,7 +276,8 @@ globalkeys = mytable.join(
     -- Open Kitty
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
-
+    awful.key({ modkey           }, "x", function () awful.spawn.with_shell("rofi -show drun") end,
+              {description = "rofi drun", group = "launcher"}),
     -- Widgets popups
     awful.key({ altkey, }, "c", function () if beautiful.cal then beautiful.cal.show(7) end end,
               {description = "show calendar", group = "widgets"}),
@@ -288,37 +292,28 @@ globalkeys = mytable.join(
     awful.key({ }, "XF86MonBrightnessDown", function () os.execute("xbacklight -dec 10") end,
               {description = "-10%", group = "hotkeys"}),
 
-    -- ALSA volume control
-    awful.key({ altkey }, "Up",
-        function ()
-            os.execute(string.format("amixer -q set %s 1%%+", beautiful.volume.channel))
-            beautiful.volume.update()
-        end,
-        {description = "volume up", group = "hotkeys"}),
-    awful.key({ altkey }, "Down",
-        function ()
-            os.execute(string.format("amixer -q set %s 1%%-", beautiful.volume.channel))
-            beautiful.volume.update()
-        end,
-        {description = "volume down", group = "hotkeys"}),
-    awful.key({ altkey }, "m",
-        function ()
-            os.execute(string.format("amixer -q set %s toggle", beautiful.volume.togglechannel or beautiful.volume.channel))
-            beautiful.volume.update()
-        end,
-        {description = "toggle mute", group = "hotkeys"}),
-    awful.key({ altkey, "Control" }, "m",
-        function ()
-            os.execute(string.format("amixer -q set %s 100%%", beautiful.volume.channel))
-            beautiful.volume.update()
-        end,
-        {description = "volume 100%", group = "hotkeys"}),
-    awful.key({ altkey, "Control" }, "0",
-        function ()
-            os.execute(string.format("amixer -q set %s 0%%", beautiful.volume.channel))
-            beautiful.volume.update()
-        end,
-        {description = "volume 0%", group = "hotkeys"}),
+-- PulseAudio volume control
+awful.key({ altkey }, "Up",
+    function ()
+        os.execute("pactl set-sink-volume @DEFAULT_SINK@ +5%")
+        beautiful.volume.update()
+    end,
+    {description = "volume up", group = "hotkeys"}),
+
+awful.key({ altkey }, "Down",
+    function ()
+        os.execute("pactl set-sink-volume @DEFAULT_SINK@ -5%")
+        beautiful.volume.update()
+    end,
+    {description = "volume down", group = "hotkeys"}),
+
+awful.key({ altkey }, "m",
+    function ()
+        os.execute("pactl set-sink-mute @DEFAULT_SINK@ toggle")
+        beautiful.volume.update()
+    end,
+    {description = "toggle mute", group = "hotkeys"}),
+
 
     -- MPD control
     awful.key({ altkey, "Control" }, "Up",
@@ -618,4 +613,4 @@ tag.connect_signal("property::selected", backham)
 --------------------------------------------------------------------------------------------------
 awful.spawn.with_shell("xrandr --output eDP --primary --mode 1366x768 --rate 60.00 --output HDMI-A-0 --mode 2560x1080 --rate 75.00 --left-of eDP")
 awful.spawn.with_shell("picom --backend xrender &")
-
+--awful.spawn.with_shell("nitrogen")
