@@ -102,7 +102,15 @@ INSTALL AND CONFIG KITTY:
       include ~/.config/kitty/catppuccin/themes/mocha.conf (confere se é isso memso)
     "
 > DONE :)
-     
+
+
+INSTALL GTK & QT THEMES
+> Make the ~/.themes and ~/.icons  
+:$ sudo apt install lxappearance qt5ct qt5ct-themes-plugins
+> Install the theme from gnome-look.org
+> Unzip and move the folder to ./themes or ./icons
+> Open lxappearance and qt5ct and change the theme there
+> DONE:)
 
 
 DEPENDENCIES:
