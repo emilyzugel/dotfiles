@@ -112,6 +112,14 @@ INSTALL GTK & QT THEMES
 > Open lxappearance and qt5ct and change the theme there
 > DONE:)
 
+INSTALL ROFI CATPPUCCIN THEME
+> Clone https://github.com/catppuccin/rofi.git
+> We need to move the themes that are inside the clone repo into the rofi theme repo (/usr/share/rofi/themes/)
+> Move the "catppuccin-defalut.rasi" to ~/.config/rofi
+> Raname your current config.rasi to config-bak.rasi (to make it a backup in case somthing goes wrong)
+> Raname the catppuccin-defalut.rasi to config.rasi (this will be be original now and then it can import the theme properly)
+> DONE :)
+
 
 DEPENDENCIES:
 pulseaudio
