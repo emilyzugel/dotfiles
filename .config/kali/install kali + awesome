@@ -124,7 +124,8 @@ INSTALL ROFI CATPPUCCIN THEME
 DEPENDENCIES:
 pulseaudio
 ranger
-lf (minimal explorer)
+vifm (minimal explorer)
+sxiv (image viwer)
 htop
 obsidian
 virtual box
