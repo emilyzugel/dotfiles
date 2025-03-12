@@ -38,10 +38,18 @@ INSTALAR FONTES ASIATICAS:
 :$ fc-cache -fv
 :$ echo "你好, こんにちは, 안녕하세요, สวัสดี, ສະບາຍດີ, ជំរាបសួរ" (testar)
 
-
+d> Da um nvim ~/.config/kitty/kitty.conf e adiciona essa linha logo abaixo da sua configuração de fonte atual:
+# Fontes de fallback para suportar caracteres asiáticos
+    | font_features Noto Sans Mono CJK JP +calt +liga
+    | font_features Noto Sans Mono CJK KR +calt +liga
+    | font_features Noto Sans Mono CJK SC +calt +liga
+    | font_features NanumGothicCoding +calt +liga
 
 KEYBOARD LAYOUTS:
 :$ setxkbmap -layout us,br,kr -option grp:ctrl_shift_toggle (nao seta esse, ta aqui so se tiver erro)
+> Vai no /etc/apt/sources.list e atualiza as list pra rodar o proximo comando
+    | deb http://deb.debian.org/debian/ bullseye main
+    | deb-src http://deb.debian.org/debian/ bullseye main
 :$ sudo apt install fcitx5 fcitx5-hangul fcitx-configtool
 :$ fcitx5-configtool (desmarca a opcao only show current language e escolhe eng prtugues br e hangul)
   > Atalhos: Global options > 
