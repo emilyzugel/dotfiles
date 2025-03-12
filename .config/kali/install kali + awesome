@@ -34,6 +34,7 @@ k1. Install Kali Linux with the graphical installer (only base system -> unmark 
 
 KEYBOARD LAYOUTS:
 :$ setxkbmap -layout us,br,kr -option grp:ctrl_shift_toggle (nao seta esse, ta aqui so se tiver erro)
+:$ sudo apt update && sudo apt install fonts-noto-cjk fonts-wqy-zenhei fonts-ipafont fonts-nanum fonts-thai-tlwg fonts-khmeros fonts-lao -y (pack de fontes asiaticas)
 :$ sudo apt install fcitx5 fcitx5-hangul fcitx-configtool
 :$ fcitx5-configtool (desmarca a opcao only show current language e escolhe eng prtugues br e hangul)
   > Atalhos: Global options > 
