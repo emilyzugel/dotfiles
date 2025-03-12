@@ -32,9 +32,16 @@ k1. Install Kali Linux with the graphical installer (only base system -> unmark 
 
     Now the themes are installed just reconfigure the system shortcuts and apparence :) 
 
+INSTALAR FONTES ASIATICAS:
+:$  sudo apt update && sudo apt install fonts-noto-cjk fonts-wqy-zenhei fonts-ipafont fonts-nanum fonts-thai-tlwg fonts-khmeros fonts-lao -y
+:$ sudo apt install fonts-noto-cjk fonts-noto-cjk-extra fonts-nanum fonts-thai-tlwg fonts-lao fonts-khmeros -y
+:$ fc-cache -fv
+:$ echo "你好, こんにちは, 안녕하세요, สวัสดี, ສະບາຍດີ, ជំរាបសួរ" (testar)
+
+
+
 KEYBOARD LAYOUTS:
 :$ setxkbmap -layout us,br,kr -option grp:ctrl_shift_toggle (nao seta esse, ta aqui so se tiver erro)
-:$ sudo apt update && sudo apt install fonts-noto-cjk fonts-wqy-zenhei fonts-ipafont fonts-nanum fonts-thai-tlwg fonts-khmeros fonts-lao -y (pack de fontes asiaticas)
 :$ sudo apt install fcitx5 fcitx5-hangul fcitx-configtool
 :$ fcitx5-configtool (desmarca a opcao only show current language e escolhe eng prtugues br e hangul)
   > Atalhos: Global options > 
