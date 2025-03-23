@@ -112,7 +112,7 @@ Install dependencies:
 INSTALL AND CONFIG KITTY:
 :$ sudo apt install kitty
 :$ sudo git clone https://github.com/catppuccin/kitty.git ~/.config/kitty/catppuccin
-:$ sudo nvim ~/.config/kitty.kitty.conf -- escreva:
+:$ sudo nvim ~/.config/kitty/kitty.conf -- escreva:
     " KITTY_ENABLE_REMOTE_CONTROL=1 kitty
       allow_remote_control yes
       include ~/.config/kitty/catppuccin/themes/mocha.conf (confere se é isso memso)
